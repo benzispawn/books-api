@@ -13,8 +13,9 @@ export abstract class BaseEntity {
     bk_name: string
 
     @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-    bk_date: Date;
+    bk_reg_date: Date;
 
-    
+    @Column({ type: 'integer' })
+    cli_id
 }
 
