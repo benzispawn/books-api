@@ -2,9 +2,10 @@
 
 
 // books
-import { PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity } from 'typeorm';
 
-export abstract class BaseEntity {
+@Entity()
+export class User {
     
     @PrimaryGeneratedColumn('identity')
     cli_id: number;
