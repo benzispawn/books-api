@@ -3,6 +3,7 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
+    "assets": ["common/envs/*", "api/**/*", "model/**/*"],
     "deleteOutDir": true
   }
 }
