@@ -24,6 +24,7 @@ export class BooksService {
     }
 
     public getBookByName(name: string): Promise<Books[]> {
+        console.log('@@ devolvou', name)
         return this.repository.findBy({
             name: ILike(`%${name}%`)
         })
@@ -32,8 +33,15 @@ export class BooksService {
     public getBookWithUser(name: string): Promise<Books[]> {
         return this.repository.createQueryBuilder('books')
             .innerJoinAndMapOne('books.client', Client, 'cli', 'books.cli_id = cli.cli_id')
-            // .where("cli.cli_name ILIKE '%:name%'", { name: name })
             .getMany()
+    }
+
+    public getBookByIdWithUser(id: number, name: string): Promise<Books[]> {
+        return this.repository.createQueryBuilder('books')
+          .innerJoinAndMapOne('books.client', Client, 'cli', 'books.cli_id = cli.cli_id')
+          .where("books.bk_id = :id", { id: id, name: name })
+          .andWhere("cli.cli_name ILIKE :name", { name: `%${name}%` })
+          .getMany()
     }
 
     public getAll(): Promise<Books[]> {

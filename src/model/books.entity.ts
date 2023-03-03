@@ -2,7 +2,7 @@
 
 
 // books
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity, ManyToOne, OneToMany } from "typeorm";
+import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, ManyToMany } from "typeorm";
 import { Client } from './client.entity';
 
 @Entity({
@@ -30,10 +30,10 @@ export class Books {
         foreignKeyConstraintName: 'cli_id',
         nullable: true 
     })
-    idUser: number;
+    cli_id: number;
 
-    @ManyToOne(type => Client, client => client.books)
-    client: Client
+    @ManyToMany(type => Client, client => client.books)
+    client: Client|Client[]
 
 }
 

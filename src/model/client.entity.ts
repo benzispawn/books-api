@@ -7,7 +7,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    OneToMany, ManyToOne
+    OneToMany, ManyToOne, ManyToMany
 } from "typeorm";
 import { Books } from "./books.entity";
 // import { Books } from './books.entity';
@@ -30,7 +30,7 @@ export class Client {
     @Column({ name: 'cli_email', type: 'character varying', length: 255, nullable: true })
     mail: string
 
-    @OneToMany(type => Books, books => books.client)
-    books: Books[]
+    @ManyToMany(type => Books, books => books.client)
+    books: Books[]|Books
 }
 
