@@ -1,22 +1,38 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { Books } from '../../model';
-import { Repository } from 'typeorm';
+import { Books, Client } from '../../model';
+import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+
+const QUERY_BY_NAME = `
+SELECT books.bk_id id
+       , books.bk_name name
+       , books.bk_reg_date date
+    FROM books
+    WHERE books.bk_name ILIKE '%$1%'
+`
 
 @Injectable()
 export class BooksService {
     @InjectRepository(Books)
     private readonly repository: Repository<Books>;
+    private readonly repositoryClient: Repository<Client>;
 
     public getBook(id: number): Promise<Books> {
         return this.repository.findOneBy({ id: id });
     }
 
-    public getBookWithUser(id: number): Promise<Books[]> {
-        return this.repository.query('SELECT books.bk_id id, books.bk_name name FROM books.books INNER JOIN books.client ON books.client.cli_id = books.books.cli_id WHERE books.books.bk_id = ?', [
-            id
-        ])
+    public getBookByName(name: string): Promise<Books[]> {
+        return this.repository.findBy({
+            name: ILike(`%${name}%`)
+        })
+    }
+
+    public getBookWithUser(name: string): Promise<Books[]> {
+        return this.repository.createQueryBuilder('books')
+            .innerJoinAndMapOne('books.client', Client, 'cli', 'books.cli_id = cli.cli_id')
+            // .where("cli.cli_name ILIKE '%:name%'", { name: name })
+            .getMany()
     }
 
     public getAll(): Promise<Books[]> {

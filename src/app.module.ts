@@ -3,17 +3,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { configService } from './config/config.service';
 import { DataSource } from 'typeorm';
-
-// import { configService } from './config/config.service';
 import { ConfigModule } from '@nestjs/config';
 import { getEnvPath } from './common/helper';
 import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
 import { ApiModule } from './api/api.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
-
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath, isGlobal: true }),
