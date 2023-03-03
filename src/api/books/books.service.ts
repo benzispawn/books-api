@@ -4,6 +4,7 @@ import { Books, Client } from '../../model';
 import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
+
 const QUERY_BY_NAME = `
 SELECT books.bk_id id
        , books.bk_name name
