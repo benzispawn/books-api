@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { Books, Client } from '../../model';
 import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from "../../model/user.dto";
+import { CreateBookDto } from "../../model/book.dto";
 
 
 const QUERY_BY_NAME = `
@@ -46,5 +48,14 @@ export class BooksService {
 
     public getAll(): Promise<Books[]> {
         return this.repository.find();
+    }
+
+    public createBook(body: CreateBookDto) {
+        const book: Books = new Books();
+        book.name = body.name;
+        book.date = new Date(body.date);
+        book.cli_id = body.idCli;
+
+        return this.repository.save(book);
     }
 }

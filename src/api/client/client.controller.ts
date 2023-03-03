@@ -1,7 +1,19 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Inject, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
+import {
+    Body,
+    Controller,
+    Get,
+    Inject,
+    Param,
+    ParseIntPipe, PipeTransform,
+    Post,
+    Query,
+    UsePipes,
+    ValidationPipe
+} from "@nestjs/common";
 import { ClientService } from './client.service';
 import { Client } from '../../model';
+import { CreateUserDto } from "../../model/user.dto";
 @Controller('api/client')
 export class ClientController {
     @Inject(ClientService)
@@ -23,8 +35,8 @@ export class ClientController {
         return this.service.getClient(id);
     }
 
-    // @Post()
-    // public createUser(@Body() body: CreateUserDto): Promise<User> {
-    //     return this.service.createUser(body);
-    // }
+    @Post()
+    public createUser(@Body() body: CreateUserDto): Promise<Client> {
+        return this.service.createUser(body);
+    }
 }
