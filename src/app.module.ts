@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-// import { configService } from './config/config.service';
+import { DataSource } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { getEnvPath } from './common/helper';
 import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
@@ -17,7 +17,12 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
     ApiModule
   ],
+  exports: [TypeOrmModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {
+
+  }
+}

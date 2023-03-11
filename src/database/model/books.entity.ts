@@ -2,18 +2,25 @@
 
 
 // books
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity } from 'typeorm';
+
+import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity, ManyToMany } from 'typeorm';
+import { Client } from './client.entity';
 
 @Entity({
     name: 'books',
-    schema: 'books'
+    schema: 'api'
 })
 export class Books {
-    
+
     @PrimaryGeneratedColumn('identity', { name: 'bk_id' })
     id: number;
 
-    @Column({ type: 'varchar', length: 255, name: 'bk_name' })
+    @Column({
+        type: 'character varying',
+        length: 50,
+        name: 'bk_name',
+        nullable: false
+    })
     name: string
 
     @CreateDateColumn({ 
@@ -29,6 +36,10 @@ export class Books {
         foreignKeyConstraintName: 'cli_id',
         nullable: true 
     })
-    user: number;
+    cli_id: number;
+
+    @ManyToMany(type => Client, client => client.books)
+    client: Client|Client[]
+
 }
 
