@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { BooksController } from './books.controller';
 import { BooksService } from './books.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Books } from '../../model';
+import { Books } from '../../database/model';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Books])],

@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from "typeorm";
-import { Books, Client } from "../../model";
+import { Books, Client } from "./../../database/model";
 
 @Injectable()
 export class ClientService {

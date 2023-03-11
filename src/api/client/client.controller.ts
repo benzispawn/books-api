@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Inject, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
 import { ClientService } from './client.service';
-import { Client } from '../../model';
+import { Client } from '../../database/model';
 @Controller('api/client')
 export class ClientController {
     @Inject(ClientService)

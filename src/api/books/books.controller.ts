@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Inject, Param, ParseIntPipe, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { BooksService } from './books.service';
-import { Books } from '../../model';
+import { Books } from '../../database/model';
 
 @Controller('/api/books')
 export class BooksController {

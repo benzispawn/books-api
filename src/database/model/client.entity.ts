@@ -7,10 +7,9 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    OneToMany, ManyToOne, ManyToMany
-} from "typeorm";
+    ManyToMany
+} from 'typeorm';
 import { Books } from "./books.entity";
-// import { Books } from './books.entity';
 
 @Entity({
     name: 'client', schema: 'books'
