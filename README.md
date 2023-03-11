@@ -14,7 +14,9 @@ Inside de folder of the application
 ```
 mkdir common/envs && touch common/.env && touch common/development.env
 ```
-Then we add this variable to the files as you database configuration (OBS: here I am using PostgreSQL but you can use other database see [TypeOrm](https://typeorm.io/))
+Then we add this variable to the files as you database configuration (OBS: here I am using PostgreSQL from [Linode](https://www.linode.com) but you can use other database see [TypeOrm](https://typeorm.io/))
+
+
 
 ```text
 PORT=3000
