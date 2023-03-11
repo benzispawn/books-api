@@ -4,6 +4,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 require('dotenv').config({ path: 'src/common/.env' });
+const fs = require('fs');
 
 export class ConfigService {
 
@@ -33,6 +34,7 @@ export class ConfigService {
   }
 
   public getTypeOrmConfig(): TypeOrmModuleOptions {
+    console.log('cert', fs.readFileSync('src/common/PostgreSQL-ca-certificate.crt').toString())
     return {
       type: 'postgres',
 
@@ -42,7 +44,7 @@ export class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DATABASE'),
 
-      entities: ['src/database/model/*.entity{.ts,.js}'],
+      entities: ['src/database/model/*.entity{.ts,.js}', 'dist/database/model/*.entity{.ts,.js}'],
 
       migrationsTableName: 'migration',
 
@@ -51,9 +53,12 @@ export class ConfigService {
       // cli: {
       //   migrationsDir: 'src/migration',
       // },
+      // ssl: {
+      //   rejectUnauthorized: false,
+      //   ca: fs.readFileSync('src/common/PostgreSQL-ca-certificate.crt').toString(),
+      // },
 
-      ssl: this.isProduction(),
-      synchronize: false,
+      synchronize: true,
     };
   }
 

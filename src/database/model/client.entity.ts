@@ -12,7 +12,7 @@ import {
 import { Books } from "./books.entity";
 
 @Entity({
-    name: 'client', schema: 'books'
+    name: 'client', schema: 'api'
 })
 export class Client {
     

@@ -8,14 +8,19 @@ import { Client } from './client.entity';
 
 @Entity({
     name: 'books',
-    schema: 'books'
+    schema: 'api'
 })
 export class Books {
 
     @PrimaryGeneratedColumn('identity', { name: 'bk_id' })
     id: number;
 
-    @Column({ type: 'varchar', length: 255, name: 'bk_name' })
+    @Column({
+        type: 'character varying',
+        length: 50,
+        name: 'bk_name',
+        nullable: false
+    })
     name: string
 
     @CreateDateColumn({ 

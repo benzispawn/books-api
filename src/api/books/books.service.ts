@@ -3,17 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { Books, Client } from '../../database/model';
 import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from "../../model/user.dto";
-import { CreateBookDto } from "../../model/book.dto";
-
-
-const QUERY_BY_NAME = `
-SELECT books.bk_id id
-       , books.bk_name name
-       , books.bk_reg_date date
-    FROM books
-    WHERE books.bk_name ILIKE '%$1%'
-`
+// import { CreateUserDto } from "../../model/user.dto";
+// import { CreateBookDto } from "../../model/book.dto";
 
 @Injectable()
 export class BooksService {
@@ -50,12 +41,12 @@ export class BooksService {
         return this.repository.find();
     }
 
-    public createBook(body: CreateBookDto) {
-        const book: Books = new Books();
-        book.name = body.name;
-        book.date = new Date(body.date);
-        book.cli_id = body.idCli;
-
-        return this.repository.save(book);
-    }
+    // public createBook(body: CreateBookDto) {
+    //     const book: Books = new Books();
+    //     book.name = body.name;
+    //     book.date = new Date(body.date);
+    //     book.cli_id = body.idCli;
+    //
+    //     return this.repository.save(book);
+    // }
 }
