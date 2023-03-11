@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
-import { Books, Client } from '../../model';
+import { Books, Client } from '../../database/model';
 import { ILike, Like, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from "../../model/user.dto";

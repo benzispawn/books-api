@@ -10,6 +10,7 @@ import { TypeOrmConfigService } from './shared/typeorm/typeorm.service';
 import { ApiModule } from './api/api.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
+
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath, isGlobal: true }),

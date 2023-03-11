@@ -1,20 +1,7 @@
 /* eslint-disable prettier/prettier */
-import {
-    Body,
-    Controller,
-    Get,
-    Inject,
-    Param,
-    ParseIntPipe,
-    Post,
-    Query,
-    UsePipes,
-    ValidationPipe
-} from "@nestjs/common";
+import { Controller, Get, Inject, Param, ParseIntPipe, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { BooksService } from './books.service';
-import { Books, Client } from "../../model";
-import { CreateUserDto } from "../../model/user.dto";
-import { CreateBookDto } from "../../model/book.dto";
+import { Books } from '../../database/model';
 
 @Controller('/api/books')
 export class BooksController {
@@ -35,11 +22,6 @@ export class BooksController {
             return this.service.getBookByIdWithUser(id, query);
         }
         return this.service.getBook(id);
-    }
-
-    @Post()
-    public createBook(@Body() body: CreateBookDto): Promise<Books> {
-        return this.service.createBook(body);
     }
 
 }

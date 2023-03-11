@@ -2,8 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from "typeorm";
-import { Books, Client } from "../../model";
-import { CreateUserDto } from "../../model/user.dto";
+import { Books, Client } from "./../../database/model";
 
 @Injectable()
 export class ClientService {
@@ -31,13 +30,14 @@ export class ClientService {
           .getMany()
     }
 
-    public createUser(body: CreateUserDto) {
-        const user: Client = new Client();
-        console.log('@@@ o corpo', body)
-        user.name = body.name;
-        user.birth = new Date(body.birth);
-        user.mail = body.mail;
+    /**
+     * public createUser(body: CreateUserDto): Promise<User> {
+    const user: User = new User();
 
-        return this.repository.save(user);
-    }
+    user.name = body.name;
+    user.email = body.email;
+
+    return this.repository.save(user);
+  }
+     */
 }

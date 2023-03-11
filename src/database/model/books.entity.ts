@@ -2,7 +2,8 @@
 
 
 // books
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, ManyToMany } from "typeorm";
+
+import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity, ManyToMany } from 'typeorm';
 import { Client } from './client.entity';
 
 @Entity({
@@ -10,7 +11,7 @@ import { Client } from './client.entity';
     schema: 'books'
 })
 export class Books {
-    
+
     @PrimaryGeneratedColumn('identity', { name: 'bk_id' })
     id: number;
 
