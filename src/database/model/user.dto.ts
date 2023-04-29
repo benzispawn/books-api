@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { IsString, IsNotEmpty, IsEmail, IsDate, IsISO8601 } from "class-validator";
+import { IsString, IsNotEmpty, IsEmail, IsDate, IsISO8601, IsInt } from "class-validator";
 
-export class CreateUserDto {
+export class CreateClientDto {
     @IsString()
     @IsNotEmpty()
     public name: string;

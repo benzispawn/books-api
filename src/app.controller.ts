@@ -1,12 +1,22 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
-
+import { Controller, UseGuards, Get } from '@nestjs/common';
+import { AuthService } from './api/auth/auth.service';
+import { JwtAuthGuard } from './api/auth/jwt-auth.guard';
+import { IsEmail, IsNotEmpty } from 'class-validator';
+export class LoginForm {
+  @IsEmail()
+  mail: string;
+  @IsNotEmpty()
+  pass: string;
+}
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly authService: AuthService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile() {
+    return {
+      teste: 'Deu certo',
+    };
   }
 }
