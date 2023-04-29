@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import {
+    Body,
     Controller,
     Get,
     Inject,
@@ -13,6 +14,7 @@ import {
 import { BooksService } from './books.service';
 import { Books } from '../../database/model';
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { BookForm } from "./models";
 
 @Controller('/api/books')
 export class BooksController {
@@ -36,5 +38,11 @@ export class BooksController {
         }
         return this.service.getBook(id);
     }
+
+    // @UseGuards(JwtAuthGuard)
+    // @Get()
+    // public getBookByName(@Body() form: BookForm): Promise<Books[]|Books> {
+    //     return this.service.getBookByName(form.name);
+    // }
 
 }

@@ -23,7 +23,6 @@ export class ClientService {
     }
 
   public getClientByEmail(mail: string): Promise<Client> {
-      console.log('passou por aqui no email')
     return this.repository.findOneBy({ mail: mail });
   }
 
