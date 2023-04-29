@@ -7,8 +7,9 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    ManyToMany
-} from 'typeorm';
+    ManyToMany, ManyToOne
+} from "typeorm";
+import { ClientLog } from "./client_log.entity";
 import { Books } from "./books.entity";
 
 @Entity({
@@ -17,7 +18,6 @@ import { Books } from "./books.entity";
 export class Client {
     
     @PrimaryGeneratedColumn('identity', {name: 'cli_id'})
-
     id: number;
 
     @Column({ name: 'cli_name', type: 'character varying', length: 50, nullable: false })
@@ -27,9 +27,15 @@ export class Client {
     birth: Date;
 
     @Column({ name: 'cli_email', type: 'character varying', length: 255, nullable: true })
-    mail: string
+    mail: string;
+
+    @Column({ name: 'cli_pass', type: 'character varying', length: 255, nullable: false })
+    pass: string;
 
     @ManyToMany(type => Books, books => books.client)
     books: Books[]|Books
+
+    @ManyToOne(type => ClientLog, logs => logs.client)
+    logs: ClientLog[] | ClientLog | null;
 }
 

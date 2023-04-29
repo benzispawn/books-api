@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ILike, Repository } from "typeorm";
+import { ILike, Repository, UpdateResult } from "typeorm";
 import { Books, Client } from "./../../database/model";
+import { CreateClientDto } from "../../database/model/user.dto";
 
 @Injectable()
 export class ClientService {
@@ -17,6 +18,15 @@ export class ClientService {
         return this.repository.findOneBy({ id: id });
     }
 
+    public getOneClient(username: string): Promise<Client | undefined> {
+        return this.repository.findOneBy({ name: username });
+    }
+
+  public getClientByEmail(mail: string): Promise<Client> {
+      console.log('passou por aqui no email')
+    return this.repository.findOneBy({ mail: mail });
+  }
+
     public getClientByName(name: string): Promise<Client[]> {
         return this.repository.findBy({
             name: ILike(`%${name}%`)
@@ -30,14 +40,22 @@ export class ClientService {
           .getMany()
     }
 
-    /**
-     * public createUser(body: CreateUserDto): Promise<User> {
-    const user: User = new User();
+   public createUser(body: CreateClientDto): Promise<Client> {
+    const user: Client = new Client();
 
     user.name = body.name;
-    user.email = body.email;
+    user.mail = body.mail;
 
     return this.repository.save(user);
   }
-     */
+
+  // public updateuser(id: number, logId: number): Promise<UpdateResult> {
+  //     return this.repository.update({
+  //       id: id
+  //     }, {
+  //
+  //     })
+  //
+  // }
+
 }
