@@ -1,10 +1,10 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ClientService } from '../client/client.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Client, ClientLog } from '../../database/model';
 import { ClientLogService } from '../client_log/client_log.service';
-import { LoginForm } from "../../app.controller";
+import { LoginForm } from '../../app.controller';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,6 @@ export class AuthService {
   ) {}
 
   async validateUser(mail: string, pass: string): Promise<any> {
-    console.log('entrou na validacao de usuário');
     const user = await this._service.getClientByEmail(mail);
     const isMatch = await bcrypt.compare(pass, user.pass);
     if (user && isMatch) {
@@ -28,7 +27,6 @@ export class AuthService {
   }
 
   async login(loginForm: LoginForm) {
-    console.log('o que ta pegando aqui....');
     const result = await this.validateUser(loginForm.mail, loginForm.pass);
     if (!result) {
       return new UnauthorizedException();

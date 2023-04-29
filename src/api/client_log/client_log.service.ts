@@ -19,9 +19,8 @@ export class ClientLogService {
   }
 
   public createLog(body: CreateClientLogDto): Promise<ClientLog> {
-    const log: CreateClientLogDto = new CreateClientLogDto();
+    const log: ClientLog = ClientLog.create();
     log.idClient = body.idClient;
-
     return this.repository.save(log);
   }
 

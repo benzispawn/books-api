@@ -7,14 +7,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany, OneToMany
+  ManyToMany, OneToMany, BaseEntity
 } from "typeorm";
 import { Client } from "./client.entity";
 
 @Entity({
   name: 'client_log', schema: 'api'
 })
-export class ClientLog {
+export class ClientLog extends BaseEntity{
 
   @PrimaryGeneratedColumn('identity', {name: 'clg_id'})
   id: number;
