@@ -13,7 +13,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   private readonly config: ConfigService;
 
   public createTypeOrmOptions(): TypeOrmModuleOptions {
-    console.log('basedir', __dirname + '/../../database/model/*.entity.{ts,js}')
+    console.log('basedir', this.config.get<string>('DATABASE_CERT'))
     return {
       type: 'postgres',
       host: this.config.get<string>('DATABASE_HOST'),
@@ -27,9 +27,9 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       logger: 'file',
       ssl: {
         rejectUnauthorized: false,
-        ca: fs.readFileSync('src/common/PostgreSQL-ca-certificate.crt').toString(),
+        ca: fs.readFileSync(this.config.get<string>('DATABASE_CERT')).toString(),
       },
-      synchronize: true, // never use TRUE in production!
+      synchronize: false, // never use TRUE in production!
     };
   }
 }
